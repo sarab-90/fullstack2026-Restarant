@@ -37,3 +37,10 @@ export const updateUserById = async (id, username, email) => {
 export const deleteUserById = async (id) => {
   await pool.query(`DELETE FROM users WHERE id = $1`, [id]);
 };
+// save refresh token
+export const saveRefreshToken = async (userId, refreshToken) => {
+  await pool.query(
+    `UPDATE users SET refresh_token = $1 WHERE id = $2`,
+    [refreshToken, userId],
+  )
+};

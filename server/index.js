@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import connectDB from "./src/config/db.js";
-
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import authRoutes from "./src/routes/authRoutes.js";
 import { errorHandler } from "./src/middleware/errorHandlerMiddleware.js";
 
@@ -11,12 +12,15 @@ dotenv.config();
 connectDB();
 
 const app = express();
+app.use(express.json());
 app.use(helmet());
 app.use(cors({
     origin: "http://localhost:5173",
-    withCredentials: true,
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
 }));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api", authRoutes);
 
