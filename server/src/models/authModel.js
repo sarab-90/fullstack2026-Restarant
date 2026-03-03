@@ -1,4 +1,4 @@
-import pool from '../config/db.js';
+import pool from "../config/db.js";
 
 //  الطريقة 1 >>استعلام لإنشاء مستخدم جديد في قاعدة البيانات
 export const createUser = async (username, email, hashed_password, role) => {
