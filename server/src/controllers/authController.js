@@ -1,12 +1,6 @@
 import { createUser } from "../models/authModel.js";
 import { findUserByEmail } from "../models/userModel.js";
 import bcrypt from "bcrypt";
-import {
-  generateRefreshTokens,
-  verifyRefreshToken,
-  generateAccessTokens,
-  verifyAccessToken,
-} from "../utils/tokensUtils.js";
 
 export const register = async (req, res) => {
   const { username, email, password } = req.validateData;
@@ -20,8 +14,6 @@ export const register = async (req, res) => {
     if (!newUser) {
       return res.status(400).json({ message: "Failed to create user" });
     }
-    console.log("50000");
-
     return res
       .status(201)
       .json({ message: "User registered successfully", user: newUser });

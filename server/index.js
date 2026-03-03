@@ -5,7 +5,10 @@ import helmet from "helmet";
 import connectDB from "./src/config/db.js";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+
 import authRoutes from "./src/routes/authRoutes.js";
+import userRoutes from "./src/routes/userRoutes.js";
+import menuRoutes from "./src/routes/menuRoutes.js";
 import { errorHandler } from "./src/middleware/errorHandlerMiddleware.js";
 
 dotenv.config();
@@ -21,9 +24,10 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+// Routes
 app.use("/api", authRoutes);
-
+app.use("/api", userRoutes);
+app.use("/api", menuRoutes);
 
 app.use(errorHandler);
 app.listen(process.env.PORT, () => {
