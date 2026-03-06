@@ -1,8 +1,9 @@
 import { createUser } from "../models/authModel.js";
 import { findUserByEmail } from "../models/userModel.js";
 import bcrypt from "bcrypt";
+import { asyncHandler } from "../middleware/asyncHandlerMiddleware.js";
 
-export const register = async (req, res) => {
+export const register = asyncHandler(async (req, res) => {
   const { username, email, password } = req.validateData;
   try {
     const existedUser = await findUserByEmail(email);
@@ -22,9 +23,9 @@ export const register = async (req, res) => {
       .status(500)
       .json({ message: "interal server error , in register" });
   }
-};
+});
 // login logic
-export const login = async (req, res) => {
+export const login = asyncHandler( async (req, res) => {
   const { email, password } = req.validateData;
   try {
     if (!email || !password) {
@@ -61,4 +62,4 @@ export const login = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: "interal server error , in login" });
   }
-};
+});

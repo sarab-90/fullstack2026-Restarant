@@ -5,10 +5,11 @@ import {
   findMenuItemByName,
   deleteMenuItemById,
   updateMenuItemById,
-} from "../models/menuModels";
+} from "../models/menuModels.js";
+import { asyncHandler } from "../middleware/asyncHandlerMiddleware.js";
 
 // create menu item
-export const createMenuItemController = async (req, res) => {
+export const createMenuItemController = asyncHandler (async (req, res) => {
   const { menu_name, description, price, image, is_available, cat_ID } =
     req.validateData;
   try {
@@ -35,9 +36,9 @@ export const createMenuItemController = async (req, res) => {
       .status(500)
       .json({ message: "interal server error , in create menu item" });
   }
-};
+});
 // get menu item by id
-export const getMenuItemByIdController = async (req, res) => {
+export const getMenuItemByIdController = asyncHandler (async (req, res) => {
   const menuId = req.params.id;
   try {
     const menuItem = await getMenuItemsById(menuId);
@@ -50,9 +51,9 @@ export const getMenuItemByIdController = async (req, res) => {
       .status(500)
       .json({ message: "interal server error , in get menu item by id" });
   }
-};
+});
 // get all menu items
-export const getAllMenuItemsController = async (req, res) => {
+export const getAllMenuItemsController = asyncHandler (async (req, res) => {
   try {
     const menuItems = await getAllMenuItems();
     if (menuItems.length === 0) {
@@ -66,9 +67,9 @@ export const getAllMenuItemsController = async (req, res) => {
       .status(500)
       .json({ message: "interal server error , in get all menu items" });
   }
-};
+});
 // find menu item by name
-export const findMenuItemByNameController = async (req, res) => {
+export const findMenuItemByNameController = asyncHandler (async (req, res) => {
   const { menu_name } = req.body;
   try {
     const menuItem = await findMenuItemByName(menu_name);
@@ -81,9 +82,9 @@ export const findMenuItemByNameController = async (req, res) => {
       .status(500)
       .json({ message: "interal server error , in find menu item by name" });
   }
-};
+});
 // update menu item by id
-export const updateMenuByIdController = async (req, res) => {
+export const updateMenuByIdController = asyncHandler (async (req, res) => {
   const menuId = req.params.id;
   const { menu_name, description, price, image, is_available, cat_ID } =
     req.body;
@@ -110,9 +111,9 @@ export const updateMenuByIdController = async (req, res) => {
       .status(500)
       .json({ message: "interal server error , in update menu item by id" });
   }
-};
+});
 // delete menu item by id
-export const deleteMenuByIdController = async (req, res) => {
+export const deleteMenuByIdController = asyncHandler (async (req, res) => {
     const menuId = req.params.id;
     try {
         const deletedMenuItem = await deleteMenuItemById(menuId);
@@ -125,4 +126,4 @@ export const deleteMenuByIdController = async (req, res) => {
         .status(500)
         .json({ message: "interal server error , in delete menu item by id" });
     }
-}
+});

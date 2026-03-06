@@ -5,8 +5,9 @@ import {
   updateUserById,
   deleteUserById,
 } from "../models/userModel.js";
+import { asyncHandler } from "../middleware/asyncHandlerMiddleware.js";
 // Get user by ID
-export const getUserByIdController = async (req, res) => {
+export const getUserByIdController = asyncHandler(async (req, res) => {
   const userId = req.params.id;
   try {
     const user = await getUserByid(userId);
@@ -20,9 +21,9 @@ export const getUserByIdController = async (req, res) => {
       error: error.message,
     });
   }
-};
+});
 // Get all users
-export const getAllUsersController = async (req, res) => {
+export const getAllUsersController = asyncHandler(async (req, res) => {
   try {
     const users = await getAllUsers();
     if (users.length === 0) {
@@ -35,9 +36,9 @@ export const getAllUsersController = async (req, res) => {
       error: error.message,
     });
   }
-};
+});
 // find user by email
-export const findUserByEmailController = async (req, res) => {
+export const findUserByEmailController = asyncHandler (async (req, res) => {
   const { email } = req.body;
   try {
     const user = await findUserByEmail(email);
@@ -51,9 +52,9 @@ export const findUserByEmailController = async (req, res) => {
       error: error.message,
     });
   }
-};
+});
 // update user by id
-export const updateUserByIdController = async (req, res) => {
+export const updateUserByIdController = asyncHandler (async (req, res) => {
   const userId = req.params.id;
   const { username, email, password } = req.body;
   try {
@@ -72,9 +73,9 @@ export const updateUserByIdController = async (req, res) => {
       error: error.message,
     });
   }
-};
+});
 // delete user by id
-export const deleteUserByIdController = async (req, res) => {
+export const deleteUserByIdController = asyncHandler (async (req, res) => {
   const userId = req.params.id;
   try {
     const deletedUser = await deleteUserById(userId);
@@ -88,4 +89,4 @@ export const deleteUserByIdController = async (req, res) => {
       error: error.message,
     });
   }
-};
+});
