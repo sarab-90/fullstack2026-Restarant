@@ -10,12 +10,14 @@ import authRoutes from "./src/routes/authRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
 import menuRoutes from "./src/routes/menuRoutes.js";
 import { errorHandler } from "./src/middleware/errorHandlerMiddleware.js";
+import { globalRateLimitMiddleware } from "./src/middleware/globalRateLimitMiddleware.js";
 
 dotenv.config();
 connectDB();
 
 const app = express();
 app.use(express.json());
+app.use(globalRateLimitMiddleware); // Apply rate limiting to all routes
 app.use(helmet());
 app.use(cors({
     origin: "http://localhost:5173",
