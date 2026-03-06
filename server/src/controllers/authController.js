@@ -63,3 +63,19 @@ export const login = asyncHandler( async (req, res) => {
     return res.status(500).json({ message: "interal server error , in login" });
   }
 });
+// logout logic
+export const logout = asyncHandler(async (req, res) => {
+  const token = req.cookies.refreshToken;
+  try {
+    if (!token) {
+      return res.status(400).json({ message: "No token provided" });
+    }
+    const decoded = verifyRefreshToken(token);
+    await saveteRefreshToken(decoded.userId, null);
+    res.clearCookie("ACCESS_TOKEN_SECRET");
+    res.clearCookie("REFRESH_TOKEN_SECRET");
+    return res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "interal server error , in logout" });
+  }
+});
