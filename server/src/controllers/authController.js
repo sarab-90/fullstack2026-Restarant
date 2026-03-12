@@ -4,14 +4,20 @@ import bcrypt from "bcrypt";
 import { asyncHandler } from "../middleware/asyncHandlerMiddleware.js";
 
 export const register = asyncHandler(async (req, res) => {
-  const { username, email, password } = req.validateData;
+  console.log(req.validateData);
   try {
+      const { username, email, password } = req.validateData;
+      console.log("before findUser");
     const existedUser = await findUserByEmail(email);
+    console.log("after findUser", existedUser);
     if (existedUser) {
       return res.status(400).json({ message: "Email already exists" });
     }
+    console.log("dddddddddddd");
     const hashedPassword = await bcrypt.hash(password, 10);
+    console.log("hashedPassword", hashedPassword);
     const newUser = await createUser(username, email, hashedPassword, "{user}");
+    console.log("newUser", newUser);
     if (!newUser) {
       return res.status(400).json({ message: "Failed to create user" });
     }

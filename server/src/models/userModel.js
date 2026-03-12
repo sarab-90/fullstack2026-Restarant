@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import {pool} from "../config/db.js";
 
 //  الطريقة 2 >>  get user by id
 export const getUserByid = async (id) => {
@@ -8,15 +8,40 @@ export const getUserByid = async (id) => {
   );
   return result.rows[0]; // اخر سطر في النتيجة
 };
+////
+export const findUserByEmail = async (email) => {
+  console.log("12email:", email);
+
+  try {
+    const result = await pool.query(
+     ` SELECT column_name FROM information_schema.columns WHERE table_name = 'users'`,
+      // `SELECT id, username, email, hashed_password, role FROM users WHERE email = $1`,
+      [email]
+    );
+          console.log("query:", query),
+    console.log("555email:", email);
+    console.log("result:", result.rows);
+
+    return result.rows[0];
+
+  } catch (error) {
+    console.log("FIND USER ERROR:", error);
+    throw error;
+  }
+};
 
 // find user by email
-export const findUserByEmail = async (email) => {
-  const result = await pool.query(
-    `SELECT id, username, email, hashed_password, role FROM users WHERE email = $1`,
-    [email],
-  );
-  return result.rows[0]; // اخر سطر في النتيجة
-};
+// export const findUserByEmail = async (email) => {
+//       console.log("12email:", email);
+//   const result = await pool.query(
+//     `SELECT id, username, email, hashed_password, role FROM users WHERE email = $1`,
+//     [email],
+    
+//   );
+//       console.log("555email:", email);
+//       console.log("result:", result);
+//   return result.rows[0]; // اخر سطر في النتيجة
+// };
 // get all users
 export const getAllUsers = async () => {
   const result = await pool.query(

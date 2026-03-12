@@ -7,7 +7,6 @@ import {
   updateMenuItemById,
 } from "../models/menuModels.js";
 import { asyncHandler } from "../middleware/asyncHandlerMiddleware.js";
-
 // create menu item
 export const createMenuItemController = asyncHandler (async (req, res) => {
   const { menu_name, description, price, image, is_available, cat_ID } =
