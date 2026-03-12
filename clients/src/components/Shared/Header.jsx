@@ -9,24 +9,35 @@ function Header() {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            color: "white",
             gap: 5,
           }}
         >
+          <Button variant="contained" color="secondary">
+            Logo
+          </Button>
           <Typography variant="h3">Restaurant</Typography>
           <Container
             sx={{
               display: "flex",
               justifyContent: "center",
               gap: 3,
-              color: "black",
             }}
           >
-            <Button>Home</Button>
-            <Button>Menu</Button>
-            <Button>About</Button>
-            <Button>Contact</Button>
-            <Button>Reserve Now</Button>
+            <Button variant="text" color="inherit">
+              Home
+            </Button>
+            <Button variant="text" color="inherit">
+              Menu
+            </Button>
+            <Button variant="text" color="inherit">
+              About
+            </Button>
+            <Button variant="text" color="inherit">
+              Contact
+            </Button>
+            <Button variant="contained" color="primary">
+              Reserve Now
+            </Button>
           </Container>
         </Toolbar>
       </AppBar>
