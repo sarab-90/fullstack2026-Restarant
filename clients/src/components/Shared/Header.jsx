@@ -1,6 +1,7 @@
 import { AppBar, Button, Container, Toolbar, Typography } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 function Header() {
+  const navigate = useNavigate();
   return (
     <>
       <AppBar position="sticky">
@@ -37,6 +38,14 @@ function Header() {
             </Button>
             <Button variant="contained" color="primary">
               Reserve Now
+            </Button>
+            <Button variant="contained" color="primary"
+            onClick={() => navigate("/register")}>
+              Register
+            </Button>
+            <Button variant="contained" color="primary"
+            onClick={() => navigate("/login")}>
+               Login
             </Button>
           </Container>
         </Toolbar>

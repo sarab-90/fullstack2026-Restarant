@@ -6,14 +6,20 @@ import { ThemeProvider } from '@mui/material/styles'
 import theme from './Theme/Theme.jsx'
 import { CssBaseline } from '@mui/material'
 import { UserProvider } from './Context/UserContext.jsx'
+import  {BrowserRouter} from "react-router-dom"
+import { MenuProvider } from './Context/MenuContex.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <BrowserRouter>
     <UserProvider>
+      <MenuProvider>
     <ThemeProvider theme={theme}>
       <CssBaseline />
     <App />
     </ThemeProvider>
+    </MenuProvider>
     </UserProvider>
+    </BrowserRouter>
   </StrictMode>,
 )
