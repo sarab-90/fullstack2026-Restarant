@@ -8,11 +8,12 @@ export function UserProvider({ children }) {
 
     const register = async (userData) => {
         try {
-            const res = await api.post("/auth/register", userData);
             if (!userData.name || !userData.email || !userData.password) {
                 tost.error("Please fill in all fields");
                 return;
             }
+            const res = await api.post("/auth/register", userData);
+            
             console.log(res)
             setUser(res.data.user);
                 tost.success(res.data.message || "Registration successful");
@@ -22,13 +23,14 @@ export function UserProvider({ children }) {
         }
     };
     // login
-    const login = (userData) => {
+    const login = async(userData) => {
         try {
-            const res = api.post("/auth/login", userData);
-            if (!userData.email || !userData.hashPassword) {
+            if (!userData.email || !userData.password) {
                 tost.error("Please fill in all fields");
                 return;
             }
+            const res = await api.post("/auth/login", userData);
+            
             setUser(res.data.user);
                 tost.success(res.data.message || "Login successful");
         } catch (error) {
