@@ -12,17 +12,17 @@ export const createMenuItem = async (
     return result.rows[0]; // اخر سطر في النتيجة
 }
 // get menu items by id
-export const getMenuItemsById = async (id) => {
+export const getMenuItemsById = async (menuId) => {
   const result = await pool.query(
-    `SELECT menuId, menu_name, description, price, image, is_available, cat_ID FROM menu WHERE id = $1`,
-    [id],
+    `SELECT * FROM menu WHERE menuId = $1`,
+    [menuId]
   );
   return result.rows[0]; // اخر سطر في النتيجة
 };
 // get all menu items
 export const getAllMenuItems = async () => {
   const result = await pool.query(
-    `SELECT menuId, menu_name, description, price, image, is_available, cat_ID FROM menu`,
+    `SELECT * FROM menu`,
   );
   return result.rows; // كل السطور في النتيجة
 };

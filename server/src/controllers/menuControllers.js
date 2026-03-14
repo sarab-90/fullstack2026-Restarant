@@ -60,7 +60,7 @@ export const getAllMenuItemsController = asyncHandler (async (req, res) => {
         .status(200)
         .json({ message: "No menu items yet", menuItems: [] });
     }
-    return res.status(200).json(menuItems);
+    return res.status(200).json({menuItems: []});
   } catch (error) {
     return res
       .status(500)
