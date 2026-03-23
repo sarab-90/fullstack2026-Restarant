@@ -1,7 +1,8 @@
-import { register, login } from "../controllers/authController.js";
+import { register, login, currentUser, logout } from "../controllers/authController.js";
 import {registerSchema, loginSchema} from "../validation/userValidation.js";
 import {validate} from "../middleware/validateMiddleware.js";
 import {authRateLimitMiddleware} from "../middleware/authRateLimitMiddleware.js";
+import {protect} from "../middleware/protectMiddleware.js"
 
 import express from 'express';
 
@@ -10,5 +11,9 @@ const router = express.Router();
 router.post('/auth/register',validate(registerSchema), authRateLimitMiddleware, register);
 
 router.post('/auth/login',validate(loginSchema), authRateLimitMiddleware, login);
+
+router.post('/auth/logout', logout )
+
+router.get('/auth/me', protect, currentUser)
 
 export default router;

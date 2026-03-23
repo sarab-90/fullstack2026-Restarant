@@ -1,6 +1,10 @@
 import { AppBar, Button, Container, Toolbar, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../Context/UserContext.jsx";
+import { useContext } from "react";
+
 function Header() {
+  const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
   return (
     <>
@@ -39,14 +43,26 @@ function Header() {
             <Button variant="contained" color="primary">
               Reserve Now
             </Button>
-            <Button variant="contained" color="primary"
-            onClick={() => navigate("/register")}>
-              Register
-            </Button>
-            <Button variant="contained" color="primary"
-            onClick={() => navigate("/login")}>
-               Login
-            </Button>
+            {user ? (
+              <Button onClick={logout}>Logout</Button>
+            ) : (
+              <>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => navigate("/register")}
+                >
+                  Register
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => navigate("/login")}
+                >
+                  Login
+                </Button>
+              </>
+            )}
           </Container>
         </Toolbar>
       </AppBar>
