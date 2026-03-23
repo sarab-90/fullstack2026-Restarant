@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import api from '../api.js'
 
@@ -6,7 +6,7 @@ export const MenuContext = createContext();
 
 export function MenuProvider({ children }) {
   const [menu, setMenu] = useState({});
-  const allMenu = async () => {
+  const fetchMenu = async () => {
     try {
       const res = await api.get("/menu");
       if (res.data.menu.length === 0) {
@@ -18,9 +18,12 @@ export function MenuProvider({ children }) {
       toast.error("Some Thing Wrong Error");
     }
   };
+  useEffect(() => {
+    fetchMenu();
+  })
   return (
     <>
-      <MenuContext.Provider value={{ allMenu, menu }}>
+      <MenuContext.Provider value={{ fetchMenu, menu }}>
         {children}
       </MenuContext.Provider>
     </>
