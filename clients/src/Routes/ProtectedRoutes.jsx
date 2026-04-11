@@ -2,7 +2,7 @@ import {Navigate, useNavigate} from "react-router-dom";
 import Cookie from "js-cookie"
 import toast from "react-hot-toast" 
 
-function ProtectedRoutes(children){
+function ProtectedRoutes({children}){
     const navigate = useNavigate()
     const token = Cookie.get("accessToken");
     if (!token){

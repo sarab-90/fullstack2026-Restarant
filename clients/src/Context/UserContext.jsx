@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import tost, { toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import api from "../api.js"
 export const UserContext = createContext();
@@ -24,34 +24,34 @@ useEffect(() => {
   const register = async (userData) => {
     try {
       if (!userData.name || !userData.email || !userData.password) {
-        tost.error("Please fill in all fields");
+        toast.error("Please fill in all fields");
         return;
       }
       const res = await api.post("/auth/register", userData);
 
       console.log(res);
       setUser(res.data.user);
-      tost.success(res.data.message || "Registration successful");
+      toast.success(res.data.message || "Registration successful");
     } catch (error) {
       console.error(error);
-      tost.error("Registration failed");
+      toast.error("Registration failed");
     }
   };
   // login
   const login = async (userData) => {
     try {
       if (!userData.email || !userData.password) {
-        tost.error("Please fill in all fields");
+        toast.error("Please fill in all fields");
         return;
       }
       const res = await api.post("/auth/login", userData);
 
       setUser(res.data.user);
-      tost.success(res.data.message || "Login successful");
+      toast.success(res.data.message || "Login successful");
       navigate("/user/home");
     } catch (error) {
       console.error(error);
-      tost.error("Login failed");
+      toast.error("Login failed");
     }
   };
   

@@ -9,5 +9,5 @@ export const validate = (schema) => {
         }
         req.validateData = value;
         next();
-    }
+    } 
 }

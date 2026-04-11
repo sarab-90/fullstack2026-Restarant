@@ -8,7 +8,7 @@ export const getUserByid = async (id) => {
   );
   return result.rows[0]; // اخر سطر في النتيجة
 };
-////
+// الطريقة 1 >>  get user by email
 export const findUserByEmail = async (email) => {
   console.log("12email:", email);
 
@@ -29,19 +29,6 @@ export const findUserByEmail = async (email) => {
     throw error;
   }
 };
-
-// find user by email
-// export const findUserByEmail = async (email) => {
-//       console.log("12email:", email);
-//   const result = await pool.query(
-//     `SELECT id, username, email, hashed_password, role FROM users WHERE email = $1`,
-//     [email],
-    
-//   );
-//       console.log("555email:", email);
-//       console.log("result:", result);
-//   return result.rows[0]; // اخر سطر في النتيجة
-// };
 // get all users
 export const getAllUsers = async () => {
   const result = await pool.query(
@@ -57,7 +44,6 @@ export const updateUserById = async (id, username, email) => {
   );
   return result.rows[0]; // اخر سطر في النتيجة
 };
-
 // delete user by id
 export const deleteUserById = async (id) => {
   await pool.query(`DELETE FROM users WHERE id = $1`, [id]);

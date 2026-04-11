@@ -1,4 +1,4 @@
-// Database connection configuration using PostgreSQL Pool
+ // Database connection configuration using PostgreSQL Pool
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 dotenv.config();

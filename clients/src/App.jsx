@@ -5,7 +5,7 @@ import LandingPage from './components/Landing/LandingPage.jsx';
 import Home from './components/Home/Home.jsx';
 import ProtectedRoutes from './Routes/ProtectedRoutes.jsx';
 import {Toaster} from 'react-hot-toast';
-import { Route, Router, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 function App() {
 
   return (
