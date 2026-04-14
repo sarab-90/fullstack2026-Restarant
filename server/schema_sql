@@ -1,0 +1,68 @@
+
+create table users (
+	userid serial primary key, 
+	created_at timestamp default current_timestamp, 
+	username varchar(100) not null, 
+	email varchar(100) unique not null, 
+	hashed_password varchar(255) not ,
+	role text[] default array['user']
+);
+select * from users
+
+
+create table categories(
+categoryid serial primary key, 
+categoryname varchar(50) not null, 
+description text,
+timestamp default current_timestamp
+)
+select * from categories
+
+CREATE TABLE MENU (
+	MENUID SERIAL PRIMARY KEY,
+	NAME VARCHAR(100) NOT NULL,
+	DESCRIPTION TEXT,
+	PRICE MONEY,
+	QUANTITY INT,
+	image text, 
+	CAT_ID INT,
+	FOREIGN KEY (CAT_ID) REFERENCES CATEGORIES (CATID)
+)
+ALTER TABLE MENU
+ADD COLUMN categoryid  INT,
+ADD FOREIGN KEY (categoryid ) REFERENCES CATEGORIES (CATID);
+
+ALTER TABLE menu 
+DROP COLUMN cat_id;
+
+SELECT
+*
+FROM
+	MENU
+
+create table tables (
+id serial PRIMARY KEY,
+table_number int not null unique,
+capacity int not null, 
+floor int null, 
+created_at timestamp default current_timestamp
+)
+select * from tables
+
+
+create table reservation(
+id serial PRIMARY KEY,
+user_id int references users(userid) on delete set null, 
+table_id int references tables(id) on delete set null, 
+full_name varchar(200) not null, 
+email varchar(100) not null, 
+phone varchar(20) not null, 
+guests_number int not null, 
+reservation_date date not null, 
+reservation_time time not null, 
+requests text, 
+status text check (status In('pending', 'approved', 'rejected')) default 'pending' ,
+created_at timestamp default current_timestamp
+);
+
+select * from reservation

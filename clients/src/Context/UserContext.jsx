@@ -23,7 +23,7 @@ useEffect(() => {
 
   const register = async (userData) => {
     try {
-      if (!userData.name || !userData.email || !userData.password) {
+      if (!userData.username || !userData.email || !userData.hashed_password) {
         toast.error("Please fill in all fields");
         return;
       }
@@ -40,7 +40,7 @@ useEffect(() => {
   // login
   const login = async (userData) => {
     try {
-      if (!userData.email || !userData.password) {
+      if (!userData.email || !userData.hashed_password) {
         toast.error("Please fill in all fields");
         return;
       }

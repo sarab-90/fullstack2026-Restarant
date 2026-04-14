@@ -1,54 +1,88 @@
 import { useState, useContext } from "react";
-import { Typography, TextField, Box , Button} from "@mui/material";
-import { UserContext } from "../../Context/UserContext";
+import {
+  Typography,
+  TextField,
+  Box,
+  Button,
+  Container,
+  Paper,
+} from "@mui/material";
+import { UserContext } from "../../Context/UserContext.jsx";
 
 function Register() {
-    const {register} = useContext(UserContext);
+  const { register } = useContext(UserContext);
   const [userData, setUserData] = useState({
-    name: "",
+    username: "",
     email: "",
-    password: "",
+    hashed_password: "",
   });
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        register(userData);
-    }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    register(userData);
+  };
   return (
-    <>
-      <Typography variant="h4">Register</Typography>
-      <Box component="form" sx={{ mt: 2 }} onSubmit={handleSubmit}>
-        <TextField
-          label="Name"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={userData.name}
-          onChange={(e) => setUserData({ ...userData, name: e.target.value })}
-        />
-        <TextField
-          label="Email"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={userData.email}
-          onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-        />
-        <TextField
-          label="Password"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          type="password"
-          value={userData.password}
-          onChange={(e) =>
-            setUserData({ ...userData, password: e.target.value })
-          }
-        />
-        <Button variant="contained" color="primary" >
-          Register
-        </Button>
-      </Box>
-    </>
+    <Container maxWidth="sm">
+      <Paper
+        elevation={6}
+        sx={{
+          mt: 10,
+          p: 5,
+          borderRadius: 3,
+        }}
+      >
+        <Typography variant="h4" textAlign="center" fontWeight="bold" mb={3}>
+          Create Account
+        </Typography>
+
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          display="flex"
+          flexDirection="column"
+        >
+          <TextField
+            label="Name"
+            fullWidth   
+            margin="normal"
+            value={userData.username}
+            onChange={(e) => setUserData({ ...userData, username: e.target.value })}
+          />
+          <TextField
+            label="Email"
+            type="email"
+            fullWidth
+            margin="normal"
+            value={userData.email}
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
+            />
+          <TextField
+            label="Password"
+            type="password"
+            fullWidth
+            margin="normal"
+            value={userData.hashed_password}
+            onChange={(e) =>
+              setUserData({ ...userData, hashed_password: e.target.value })
+            }
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            size="large"
+            sx={{
+              mt: 3,
+              py: 1.5,
+              fontWeight: "bold",
+            }}
+          >
+            Register
+          </Button>
+        </Box>
+      </Paper>
+    </Container>
   );
 }
 export default Register;

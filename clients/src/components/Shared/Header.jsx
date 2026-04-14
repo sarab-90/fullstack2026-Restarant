@@ -8,13 +8,14 @@ function Header() {
   const navigate = useNavigate();
   return (
     <>
-      <AppBar position="sticky">
+      <AppBar position="fixed" mb={7} >
         <Toolbar
           sx={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
             gap: 5,
+            
           }}
         >
           <Button variant="contained" color="secondary">
@@ -28,6 +29,11 @@ function Header() {
               gap: 3,
             }}
           >
+            <Button variant="text" color="inherit"
+              onClick={() => navigate("/manager/categories")}
+            >
+              categories
+            </Button>
             <Button variant="text" color="inherit">
               Home
             </Button>
